@@ -7,4 +7,4 @@ Topology: One (1) HQ & four (4) simple branches with a router and a switch.
 
 **Deploy and validate:**
 * DMVPN
-* OSPF
+* ~~OSPF~~ EIGRP
