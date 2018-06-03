@@ -1,0 +1,10 @@
+! -------------------------------------------------------------------
+! VLAN configuration
+! -------------------------------------------------------------------
+{% for vlan in vlans %}
+{% if vlan.id and vlan.name is defined %}
+vlan {{vlan.id}}
+ name {{vlan.name}}
+{% endif %}
+{% endfor %}
+!

@@ -1,0 +1,24 @@
+! -------------------------------------------------------------------
+! VLAN configuration
+! -------------------------------------------------------------------
+vlan 1
+ name management
+vlan 10
+ name data
+vlan 20
+ name voice
+!! -------------------------------------------------------------------
+! Management interface configuration
+! -------------------------------------------------------------------
+interface Vlan1
+ description Management interface
+ ip address 10.100.1.2 255.255.255.0
+!
+ip default-gateway 10.100.1.1! -------------------------------------------------------------------
+! Uplink interface configuration
+! -------------------------------------------------------------------
+interface Ethernet0/0
+ description Uplink
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!

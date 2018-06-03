@@ -1,0 +1,8 @@
+! -------------------------------------------------------------------
+! Management interface configuration
+! -------------------------------------------------------------------
+interface Vlan1
+ description Management interface
+ ip address 10.{{site_id}}.1.2 255.255.255.0
+!
+ip default-gateway 10.{{site_id}}.1.1

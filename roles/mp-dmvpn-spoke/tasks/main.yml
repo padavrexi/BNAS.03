@@ -1,0 +1,3 @@
+---
+- name: Build spoke router DMVPN configuration
+  template: src=dmvpnconf.j2 dest={{baseconfdir.path}}/03_dmvpnconf.txt

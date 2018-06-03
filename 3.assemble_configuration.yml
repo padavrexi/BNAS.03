@@ -1,0 +1,7 @@
+---
+- name: Assemble configuration
+  hosts: all
+  tasks:
+
+  - name: Assemble configuration
+    assemble: src=config/{{ansible_host}}/ dest=config/{{ansible_host}}/00_fullconf.txt

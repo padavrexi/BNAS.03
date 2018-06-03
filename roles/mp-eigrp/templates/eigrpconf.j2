@@ -1,0 +1,11 @@
+! -------------------------------------------------------------------
+! EIGRP configuration
+! -------------------------------------------------------------------
+router eigrp 1
+ network 10.0.0.0 0.0.0.255
+{% for vlan in vlans %}
+{% if vlan.id is defined %}
+ network 10.{{site_id}}.{{vlan.id}}.0 0.0.0.255
+{% endif %}
+{% endfor %}
+ no auto-summary

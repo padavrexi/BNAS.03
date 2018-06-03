@@ -1,0 +1,77 @@
+! -------------------------------------------------------------------
+! FQDN configuration
+! -------------------------------------------------------------------
+hostname {{ansible_host}}
+ip domain-name {{domainname}}
+!
+!
+! -------------------------------------------------------------------
+! SNMP configuration
+! -------------------------------------------------------------------
+snmp-server community {{snmp_rw}} RW
+snmp-server community {{snmp_ro}} RO
+snmp-server trap link ietf
+snmp-server enable traps snmp linkdown linkup coldstart warmstart
+{% for snmpserver in snmpservers %}
+{% if snmpserver.ip is defined %}
+snmp-server host {{snmpserver.ip}} version 2c {{snmp_ro}}
+{% endif %}
+{% endfor %}
+!
+!
+! -------------------------------------------------------------------
+! DNS servers configuration
+! -------------------------------------------------------------------
+{% for nameserver in nameservers %}
+{% if nameserver.ip is defined %}
+ip name-server {{nameserver.ip}}
+{% endif %}
+{% endfor %}
+!
+!
+! -------------------------------------------------------------------
+! Syslog configuration
+! -------------------------------------------------------------------
+logging trap debugging
+logging facility local2
+{% for syslogserver in syslogservers %}
+{% if syslogserver.ip is defined %}
+logging host {{syslogserver.ip}}
+{% endif %}
+{% endfor %}
+!
+!
+! -------------------------------------------------------------------
+! NTP configuration
+! -------------------------------------------------------------------
+ntp server {{ntpserver_a}} prefer
+ntp server {{ntpserver_b}}
+!
+!
+! -------------------------------------------------------------------
+! Common configuration
+! -------------------------------------------------------------------
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+clock timezone EET 2 0
+!
+no ip cef
+no ipv6 cef
+no ip routing
+no ip domain-lookup
+ipv6 multicast rpf use-bgp
+file prompt quiet
+no ip http server
+lldp run
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+vlan internal allocation policy ascending
+!
+!
+line vty 0 4
+ login local
+ transport input ssh
+!

@@ -1,0 +1,3 @@
+---
+- name: Build basic switch configuration
+  template: src=baseconf.j2 dest={{baseconfdir.path}}/01_baseconf.txt

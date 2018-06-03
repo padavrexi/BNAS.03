@@ -1,0 +1,28 @@
+! -------------------------------------------------------------------
+! WAN interfaces configuration
+! -------------------------------------------------------------------
+interface Ethernet0/1
+ description WAN - MPLS
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+!! -------------------------------------------------------------------
+! LAN interfaces configuration
+! -------------------------------------------------------------------
+interface Ethernet0/0
+ description LAN
+ no shutdown
+!
+interface Ethernet0/0.1
+ description management
+ encapsulation dot1Q 1
+ ip address 10.1.1.1 255.255.255.0
+interface Ethernet0/0.10
+ description data
+ encapsulation dot1Q 10
+ ip address 10.1.10.1 255.255.255.0
+interface Ethernet0/0.20
+ description voice
+ encapsulation dot1Q 20
+ ip address 10.1.20.1 255.255.255.0
+!
+!

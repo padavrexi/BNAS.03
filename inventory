@@ -1,0 +1,13 @@
+[routers]
+mp-hq-01 site_id=100
+mp-br-01 site_id=1
+mp-br-02 site_id=2
+mp-br-03 site_id=3
+mp-br-04 site_id=4
+
+[switches]
+sw-hq-01 site_id=100
+sw-br-01 site_id=1
+sw-br-02 site_id=2
+sw-br-03 site_id=3
+sw-br-04 site_id=4

@@ -1,0 +1,3 @@
+---
+- name: Build interfaces
+  template: src=baseconf.j2 dest={{baseconfdir.path}}/02_l3conf.txt

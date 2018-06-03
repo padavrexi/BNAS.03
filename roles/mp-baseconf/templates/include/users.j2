@@ -1,0 +1,6 @@
+!
+{% for user in users %}
+{% if user.name and user.privilege and user.secret is defined %}
+username {{user.name}} privilege {{user.privilege}} secret {{user.secret}}
+{% endif %}
+{% endfor %}

@@ -1,0 +1,22 @@
+---
+- name: Configure switches
+  hosts: sw-*
+  roles:
+  - sw-baseconf
+  - sw-l2conf
+
+- name: Configure spoke routers
+  hosts: mp-br-*
+  roles:
+  - mp-baseconf
+  - mp-l3conf
+  - mp-dmvpn-spoke
+  - mp-eigrp
+
+- name: Configure hub routers
+  hosts: mp-hq-*
+  roles:
+  - mp-baseconf
+  - mp-l3conf
+  - mp-dmvpn-hub
+  - mp-eigrp

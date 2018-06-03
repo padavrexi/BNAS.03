@@ -1,0 +1,18 @@
+! -------------------------------------------------------------------
+! DMVPN spoke configuration
+! -------------------------------------------------------------------
+interface Tunnel0
+ ip address 10.0.0.1 255.255.255.0
+ no ip redirects
+ no ip split-horizon eigrp 1
+ no ip mroute-cache
+ ip mtu 1400
+ ip nhrp authentication cisco
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 1
+ tunnel source Ethernet0/1
+ tunnel mode gre multipoint
+ ip nhrp map 10.0.0.100 10.10.10.100
+ ip nhrp map multicast 10.10.10.100
+ ip nhrp nhs 10.0.0.100
+!

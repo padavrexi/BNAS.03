@@ -1,0 +1,7 @@
+vlans:
+  - id: 1
+    name: management
+  - id: 10
+    name: data
+  - id: 20
+    name: voice

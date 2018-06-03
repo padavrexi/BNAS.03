@@ -1,0 +1,10 @@
++file prompt quiet
++username cisco privilege 15 secret cisco
++username nk privilege 15 secret cisco
++vlan 1
++ name management
++vlan 10
++ name data
++vlan 20
++ name voice
++ip default-gateway 10.2.1.1! -------------------------------------------------------------------

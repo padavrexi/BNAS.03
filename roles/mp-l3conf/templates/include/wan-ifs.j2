@@ -1,0 +1,8 @@
+! -------------------------------------------------------------------
+! WAN interfaces configuration
+! -------------------------------------------------------------------
+interface Ethernet0/1
+ description WAN - MPLS
+ ip address 10.10.10.{{site_id}} 255.255.255.0
+ no shutdown
+!

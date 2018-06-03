@@ -1,0 +1,19 @@
+---
+- name: Construct site configuration using a services model
+  hosts: all
+  pre_tasks:
+    - name: Remove old config
+      file: path=config/{{ansible_host}}/ state=absent
+      register: baseconfdir
+
+    - name: Create empty
+      file: path={{baseconfdir.path}} state=directory
+
+  tasks:
+    - name: Import VLAN database
+      include_vars: vars/vlans.yml
+
+- import_playbook: 1.get_facts.yml
+- import_playbook: 2.define_roles.yml
+- import_playbook: 3.assemble_configuration.yml
+- import_playbook: 4.push_configuration.yml

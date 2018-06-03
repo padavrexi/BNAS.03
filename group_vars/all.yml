@@ -1,0 +1,27 @@
+ansible_user: cisco
+ansible_ssh_pass: cisco
+ansible_connection: network_cli
+ansible_network_os: ios
+
+domainname: ansible.lab
+snmp_rw: private
+snmp_ro: public
+snmpservers:
+  # -ip: 10.10.100.10
+  -ip: 10.10.100.11
+nameservers:
+  - ip: 10.10.100.20
+  - ip: 10.10.100.21
+syslogservers:
+  - ip: 10.10.100.30
+  - ip: 10.10.100.31
+ntpserver_a: 10.10.100.40
+ntpserver_b: 10.10.100.41
+
+users:
+  - name: cisco
+    secret: cisco
+    privilege: 15
+  - name: nk
+    secret: cisco
+    privilege: 15

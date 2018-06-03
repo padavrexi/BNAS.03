@@ -1,0 +1,118 @@
+version 15.4
+! -------------------------------------------------------------------
+! FQDN configuration
+! -------------------------------------------------------------------
+hostname mp-br-02
+ip domain-name ansible.lab
+!
+!
+! -------------------------------------------------------------------
+! SNMP configuration
+! -------------------------------------------------------------------
+snmp-server community private RW
+snmp-server community public RO
+snmp-server trap link ietf
+snmp-server enable traps snmp linkdown linkup coldstart warmstart
+!
+!
+! -------------------------------------------------------------------
+! DNS servers configuration
+! -------------------------------------------------------------------
+ip name-server 10.10.100.20
+ip name-server 10.10.100.21
+!
+!
+! -------------------------------------------------------------------
+! Syslog configuration
+! -------------------------------------------------------------------
+logging trap debugging
+logging facility local2
+logging host 10.10.100.30
+logging host 10.10.100.31
+!
+!
+! -------------------------------------------------------------------
+! NTP configuration
+! -------------------------------------------------------------------
+ntp server 10.10.100.40 prefer
+ntp server 10.10.100.41
+!
+!
+! -------------------------------------------------------------------
+! Common configuration
+! -------------------------------------------------------------------
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+clock timezone EET 2 0
+!
+no ip cef
+no ipv6 cef
+ip forward-protocol nd
+no ip domain-lookup
+file prompt quiet
+no ip http server
+no ip http secure-server
+lldp run
+!
+line vty 0 4
+ login local
+ transport input ssh
+!!
+username cisco privilege 15 secret cisco
+username nk privilege 15 secret cisco
+! -------------------------------------------------------------------
+! WAN interfaces configuration
+! -------------------------------------------------------------------
+interface Ethernet0/1
+ description WAN - MPLS
+ ip address 10.10.10.2 255.255.255.0
+ no shutdown
+!! -------------------------------------------------------------------
+! LAN interfaces configuration
+! -------------------------------------------------------------------
+interface Ethernet0/0
+ description LAN
+ no shutdown
+!
+interface Ethernet0/0.1
+ description management
+ encapsulation dot1Q 1
+ ip address 10.2.1.1 255.255.255.0
+interface Ethernet0/0.10
+ description data
+ encapsulation dot1Q 10
+ ip address 10.2.10.1 255.255.255.0
+interface Ethernet0/0.20
+ description voice
+ encapsulation dot1Q 20
+ ip address 10.2.20.1 255.255.255.0
+!
+!
+! -------------------------------------------------------------------
+! DMVPN spoke configuration
+! -------------------------------------------------------------------
+interface Tunnel0
+ ip address 10.0.0.2 255.255.255.0
+ no ip redirects
+ no ip split-horizon eigrp 1
+ no ip mroute-cache
+ ip mtu 1400
+ ip nhrp authentication cisco
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 1
+ tunnel source Ethernet0/1
+ tunnel mode gre multipoint
+ ip nhrp map 10.0.0.100 10.10.10.100
+ ip nhrp map multicast 10.10.10.100
+ ip nhrp nhs 10.0.0.100
+!
+! -------------------------------------------------------------------
+! EIGRP configuration
+! -------------------------------------------------------------------
+router eigrp 1
+ network 10.0.0.0 0.0.0.255
+ network 10.2.1.0 0.0.0.255
+ network 10.2.10.0 0.0.0.255
+ network 10.2.20.0 0.0.0.255
+ no auto-summary

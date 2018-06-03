@@ -1,0 +1,3 @@
+---
+- name: Build VLAN database and management interface
+  template: src=baseconf.j2 dest={{baseconfdir.path}}/02_l2conf.txt

@@ -1,0 +1,15 @@
+! -------------------------------------------------------------------
+! DMVPN hub configuration
+! -------------------------------------------------------------------
+interface Tunnel0
+ ip address 10.0.0.100 255.255.255.0
+ no ip redirects
+ no ip split-horizon eigrp 1
+ no ip mroute-cache
+ ip mtu 1400
+ ip nhrp authentication cisco
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 1
+ tunnel source Ethernet0/1
+ tunnel mode gre multipoint
+!

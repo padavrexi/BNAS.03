@@ -1,0 +1,17 @@
+! -------------------------------------------------------------------
+! LAN interfaces configuration
+! -------------------------------------------------------------------
+interface Ethernet0/0
+ description LAN
+ no shutdown
+!
+{% for vlan in vlans %}
+{% if vlan.id and vlan.name is defined %}
+interface Ethernet0/0.{{vlan.id}}
+ description {{vlan.name}}
+ encapsulation dot1Q {{vlan.id}}
+ ip address 10.{{site_id}}.{{vlan.id}}.1 255.255.255.0
+{% endif %}
+{% endfor %}
+!
+!

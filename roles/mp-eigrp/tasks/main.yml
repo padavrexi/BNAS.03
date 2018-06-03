@@ -1,0 +1,3 @@
+---
+- name: Build router EIGRP configuration
+  template: src=eigrpconf.j2 dest={{baseconfdir.path}}/04_eigrpconf.txt
